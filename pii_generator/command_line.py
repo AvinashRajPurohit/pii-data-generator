@@ -17,10 +17,10 @@ def get_cli_pii_data(args):
     pii_gen.insert_data_in_mongo(args.conn)
     print("*************" * 5)
     print("Data Inserted successfully")
+    pii_gen.get_data_in_json_file()
   return pii_gen.get_data_in_dict()
 
-
-if __name__ == "__main__":
+def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--n',
                       type=int, 
@@ -44,6 +44,8 @@ if __name__ == "__main__":
   
   args = parser.parse_args()
 
-  sys.stdout.write(str(get_cli_pii_data(args)))
+  # sys.stdout.write(str(get_cli_pii_data(args)))
   print("============"*5)
   pprint(get_cli_pii_data(args))
+
+

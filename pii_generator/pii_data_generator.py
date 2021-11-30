@@ -1,6 +1,9 @@
 from faker import  Faker
 from .card_generator import CreditCardGenerator
 import pandas as pd
+import json
+import os
+from datetime import datetime
 from mongoengine import connect
 from .mongo_docs import PIIDocument
 from json import loads as json_loads
@@ -116,6 +119,20 @@ class PIIGenerator(object):
     except Exception as e:
       return {f"message: something went wrong // {e}"}
 
+  def get_data_in_json_file(self):
+    """
+    This function will return PII data in json file
+    """
+    try:
+      data = self.get_data_in_dict()
+      file_path = os.path.join(os.path.expanduser('~'), 'Desktop', f'data_{str(datetime.today().time())}.json')
+      with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+        f.close()
+      return f"data imported in json successfully // {file_path}"
+
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
 
 
   # class method data insert in mongo
@@ -144,5 +161,4 @@ class PIIGenerator(object):
 
 
 # p = PIIGenerator(how_many=400, both_credit_type=True)
-# conn_str = ""
-# print(p.insert_data_in_mongo(conn_str))
+# p.get_data_in_json_file()
