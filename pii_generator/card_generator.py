@@ -9,7 +9,7 @@ some part of this file inspired from https://github.com/eye9poob/python/blob/mas
 
 """
 import copy
-from utils import get_random_generator
+from .utils import get_random_generator
 
 
   

@@ -1,10 +1,10 @@
 from faker import  Faker
-from card_generator import CreditCardGenerator
+from .card_generator import CreditCardGenerator
 import pandas as pd
 from mongoengine import connect
-from mongo_utils.documents.docs import PIIDocument
+from .mongo_docs import PIIDocument
 from json import loads as json_loads
-from utils import ( return_prefix_ls, 
+from .utils import ( return_prefix_ls, 
                     return_random_blood,
                     return_random_cvv,
                     return_random_height_weight,

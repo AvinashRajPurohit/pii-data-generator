@@ -1,7 +1,7 @@
 import argparse
 import sys 
 from pprint import pprint
-from pii_data_generator import PIIGenerator
+from .pii_data_generator import PIIGenerator
 
 def get_cli_pii_data(args):
   """

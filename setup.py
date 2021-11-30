@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="pii-data-generator",
-    version="1.0.2",
+    version="1.1.8",
     description="It generats the dummy 'Personally identifiable information' data",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -29,10 +29,9 @@ setup(
     packages=["pii_generator"],
     include_package_data=True,
     entry_points = {
-        'console_scripts': ['pii = pii_generator.command_line'],
+        'console_scripts': ['pii = pii_generator.command_line:main'],
     },
     install_requires=[
-            "bleach==4.1.0",
             "certifi==2021.10.8",
             "charset-normalizer==2.0.8",
             "colorama==0.4.4",
@@ -50,7 +49,6 @@ setup(
             "pymongo==3.12.1",
             "pyparsing==3.0.6",
             "python-dateutil==2.8.2",
-            "pytz==2021.3",
             "readme-renderer==30.0",
             "requests==2.26.0",
             "requests-toolbelt==0.9.1",

@@ -1,5 +1,5 @@
 from random import Random
-from constants import *
+from pii_generator.constants import *
 import decimal
 
 
