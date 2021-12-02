@@ -1,6 +1,18 @@
 from random import Random
-from .constants import *
 import decimal
+
+try:
+  from production_config import PRODUCTION
+except:
+  from .production_config import PRODUCTION
+
+
+if PRODUCTION:
+  from .constants import *
+else:
+  from constants import *
+
+
 
 
 def get_random_generator():
@@ -85,3 +97,9 @@ def return_expiry_date():
   return  month+'/'+ str(year)
 
 
+def is_json_path_valid(json_path: str):
+  splitted = json_path.split('.')
+  if splitted[-1].lower() == 'json':
+    return True
+  return False
+  

@@ -16,7 +16,6 @@ class PIIDocument(Document):
     """
     first_name = StringField()
     last_name = StringField()
-    phone_number = StringField()
     address = StringField()
     country = StringField()
     dob = DateTimeField()

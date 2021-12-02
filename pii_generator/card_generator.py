@@ -9,7 +9,14 @@ some part of this file inspired from https://github.com/eye9poob/python/blob/mas
 
 """
 import copy
-from .utils import get_random_generator
+try:
+  from production_config import PRODUCTION
+except:
+  from .production_config import PRODUCTION
+if PRODUCTION:
+  from .utils import get_random_generator
+else:
+  from utils import get_random_generator
 
 
   
@@ -81,9 +88,7 @@ class CreditCardGenerator(object):
 
   def return_card_number(self, prefix_ls):
     """
-
     This function will return perticular cradit card number
-
     """
 
     cc_number = copy.copy(self.random_generator.choice(prefix_ls))
