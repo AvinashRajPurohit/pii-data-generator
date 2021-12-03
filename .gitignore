@@ -119,4 +119,3 @@ pyvenv.cfg
 
 env
 **/__pycache__/
-config_example

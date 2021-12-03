@@ -54,6 +54,46 @@ pii --n 400  --a yes --conn <mongo-db connection string>
 ```
 
 #### For Programmers usage:
+
+## For the all the cosmos databases or in mongo database
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+database_conn_string = ""
+pii_gen.insert_data_in_mongo(database_conn_string)
+```
+
+## For insert data in azure mysql
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+mysql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/azure_mysql.json"
+pii_gen.insert_pii_data_in_azure_mysql_db(mysql_config_json_file_path)
+```
+## For insert data in azure postgres
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+psql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/azure_psql.json"
+pii_gen.insert_pii_data_in_azure_mysql_db(psql_config_json_file_path)
+
+```
+## For insert data in azure maria
+
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+psql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/maria.json"
+pii_gen.insert_pii_data_in_azure_maria_db(psql_config_json_file_path)
+```
+
+
+
+
 ```bash
 from pprint import pprint
 from pii_generator.pii_data_generator import PIIGenerator
