@@ -1,4 +1,3 @@
-from mongoengine import connection
 import mysql.connector
 from pathlib import Path
 from pydantic import BaseModel, Field
@@ -7,6 +6,8 @@ try:
   from production_config import PRODUCTION
 except:
   from .production_config import PRODUCTION
+
+  
 if PRODUCTION:
     from .constants import MARIADB_EXCLUDED_DBS, PII_TABLE_SQL_QUERY, INSERT_QUERY_MARIADB
     from .utils import is_json_path_valid
@@ -17,33 +18,29 @@ else:
 
 abs_path = Path(__file__).parent.absolute()
 
-def get_maria_connection(user: str, host: str,
-                         port: int, database: str, password: str):
+def get_mysql_connection(user: str, host: str,
+                        database: str, password: str):
     
     """
-    this function return maria connection
+    this function return mysql connection
     user: str = user name of database admin
     db_server_name: str = server name of database on azure
     db_port: str = database port on azure
     db_name: str = name of database
     """
     # try:
-    ssl_file = f'{abs_path}/BaltimoreCyberTrustRoot.crt.pem'
     connection = mysql.connector.connect(
         user=user,
         password=password,
         database=database,
-        host=host,
-        port=port,
-        ssl_ca=ssl_file
-
+        host=host
     )
     return connection
 
 
 # Pydentic model
 
-class MariaConfig(BaseModel):
+class MysqlConfig(BaseModel):
     """
     Have some validation
     """
@@ -51,18 +48,16 @@ class MariaConfig(BaseModel):
     password: str = Field(...)
     database: str = Field(...)
     host: str = Field(...)
-    port: int = Field(...)
 
 
-def get_maria_config_data_from_json(file_path: str):
+def get_mysql_config_data_from_json(file_path: str):
 
     if is_json_path_valid(file_path):
         f = open(file_path)
         data = json_load(f)
-        print(data)
         f.close()
         try:
-            MariaConfig(**data)
+            MysqlConfig(**data)
         except Exception as e:
             return f"message: {e}"
         return data
@@ -71,17 +66,14 @@ def get_maria_config_data_from_json(file_path: str):
         return "message: kindly enter the valid path of json"
 
 
-def enter_pii_data_in_maria(file_path: str, pii_data: list):
-    config_data = get_maria_config_data_from_json(file_path)
+def enter_pii_data_in_gcp_mysql(file_path: str, pii_data: list):
+    config_data = get_mysql_config_data_from_json(file_path)
     if type(config_data) == dict:
-        conn = get_maria_connection(**config_data)
+        conn = get_mysql_connection(**config_data)
         conn.autocommit = True
         cursor = conn.cursor()
         if config_data['database'] in MARIADB_EXCLUDED_DBS:
-            try:
-                cursor.execute("Create Database test;")
-            except: 
-                pass
+            cursor.execute("Create Database test;")
             cursor.execute("Use test;")
         try:
             cursor.execute(PII_TABLE_SQL_QUERY)

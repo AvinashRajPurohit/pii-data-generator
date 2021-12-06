@@ -1,7 +1,7 @@
 {
     "database": "mysql",
-    "password": "password",
-    "host": "host",
+    "password": "ua@#$nkwg!1",
+    "host": "mariaformsec.mariadb.database.azure.com",
     "port": 3306,
-    "user": "user"
+    "user": "rkdb@mariaformsec"
 }

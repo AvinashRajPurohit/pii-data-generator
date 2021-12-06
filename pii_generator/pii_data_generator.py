@@ -14,6 +14,7 @@ except:
 
 if PRODUCTION:
   from .mongo_docs import PIIDocument
+  from .gcp_mysql import enter_pii_data_in_gcp_mysql
   from .card_generator import CreditCardGenerator
   from .utils import ( return_prefix_ls, 
                       return_random_blood,
@@ -23,17 +24,23 @@ if PRODUCTION:
   from .maria import enter_pii_data_in_maria
   from .mysql_config import enter_pii_data_in_mysql
   from .psql_config import enter_pii_data_in_psql
+  from .gcp_psql import enter_pii_data_in_gcp_psql
+  from .gcp_sql import enter_pii_data_in_gcp_sql  
+  from .gcp_bigquery import enter_pii_data_in_gcp_bigquery
+
 
 else:
-
-  from mongo_docs import PIIDocument
-  from card_generator import CreditCardGenerator
+  from .mongo_docs import PIIDocument
+  from .card_generator import CreditCardGenerator
+  from .gcp_mysql import enter_pii_data_in_gcp_mysql
+  from gcp_psql import enter_pii_data_in_gcp_psql
   from maria import enter_pii_data_in_maria
   from mysql_config import enter_pii_data_in_mysql
   from psql_config import enter_pii_data_in_psql
+  from gcp_sql import enter_pii_data_in_gcp_sql  
+  from gcp_bigquery import enter_pii_data_in_gcp_bigquery
 
-
-  from utils import ( return_prefix_ls, 
+  from .utils import ( return_prefix_ls, 
                       return_random_blood,
                       return_random_cvv,
                       return_random_height_weight,
@@ -79,7 +86,7 @@ class PIIGenerator(object):
                 "credit_card": [],
                 "card_type": [],
                 "cvv": [],
-                "expiry_data": [],
+                "expiry_date": [],
                 "height": [],
                 "weight": [],
                 "blood_group": []
@@ -104,7 +111,7 @@ class PIIGenerator(object):
         data_dict["card_type"].append(card_type)
         data_dict["credit_card"].append(card_gen.return_card_number(prefix_ls))
         data_dict["cvv"].append(return_random_cvv())
-        data_dict["expiry_data"].append(return_expiry_date())
+        data_dict["expiry_date"].append(return_expiry_date())
       return data_dict
 
     except Exception as e:
@@ -203,6 +210,7 @@ class PIIGenerator(object):
     """
     This function will insert PII data in Azure Maria db
     """
+    print(config_file_path)
     try:
       pii_data = self.get_data_for_sql()
       insert_data = enter_pii_data_in_maria(config_file_path, pii_data)
@@ -243,7 +251,68 @@ class PIIGenerator(object):
       return {f"message: something went wrong // {e}"}
 
 
+  def insert_pii_data_in_gcp_psql_db(self, config_file_path: str):
+    """
+    This function will insert PII data in Azure Mysql db
+    """
+    try:
+      pii_data = self.get_data_for_sql()
+      insert_data = enter_pii_data_in_gcp_psql(config_file_path, pii_data)
+
+      if type(insert_data) == bool:
+        return "message: Data has been inserted successfully"
+      return insert_data
+      
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
+
+
+  def insert_pii_data_in_gcp_sql_db(self, config_file_path: str):
+    """
+    This function will insert PII data in Azure Mysql db
+    """
+    try:
+      pii_data = self.get_data_for_sql()
+      insert_data = enter_pii_data_in_gcp_sql(config_file_path, pii_data)
+
+      if type(insert_data) == bool:
+        return "message: Data has been inserted successfully"
+      return insert_data
+      
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
+
+
+  def insert_pii_data_in_gcp_mysql_db(self, config_file_path: str):
+    """
+    This function will insert PII data in Azure Mysql db
+    """
+    try:
+      pii_data = self.get_data_for_sql()
+      insert_data = enter_pii_data_in_gcp_mysql(config_file_path, pii_data)
+
+      if type(insert_data) == bool:
+        return "message: Data has been inserted successfully"
+      return insert_data
+      
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
+
+  def insert_pii_data_in_gcp_big_query(self, config_file_path: str):
+    """
+    This function will insert PII data in Azure Mysql db
+    """
+    try:
+      pii_data = self.get_data_in_df()
+      insert_data = enter_pii_data_in_gcp_bigquery(config_file_path, pii_data)
+      if type(insert_data) == bool:
+        return "message: Data has been inserted successfully"
+      return insert_data
+      
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
+
 
 
 # p = PIIGenerator(how_many=400, both_credit_type=True)
-# print(p.get_data_in_dict())
+# print(p.insert_pii_data_in_gcp_big_query("/Users/deepak9636/Downloads/pii-data-generator-master/config_example/gcp_bigquery.json"))

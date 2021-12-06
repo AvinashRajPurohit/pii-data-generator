@@ -1,4 +1,7 @@
 from datetime import datetime
+from google.cloud import bigquery
+
+
 
 MASTER_CARD_PREFIXS = [
         ['5', '1'],
@@ -54,12 +57,12 @@ PII_TABLE_SQL_QUERY = ( "CREATE TABLE if not exists PII ("
                         "height REAL,"
                         "weight INTEGER,"
                         "blood_group VARCHAR(255),"
-                        "expiry_data VARCHAR(255))")
+                        "expiry_date VARCHAR(255))")
 
 
 
 INSERT_QUERY_MARIADB = """ insert into PII (
-first_name, last_name, address, email, country, dob, credit_card, card_type, cvv, expiry_data, height, weight, blood_group) 
+first_name, last_name, address, email, country, dob, credit_card, card_type, cvv, expiry_date, height, weight, blood_group) 
 values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)           
 """
 
@@ -67,3 +70,20 @@ values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
 AZURE_DATABASES = ['maria', 'sql', 'mysql', 'psql']
 
 GCP_DATABASES = ["sql", "mysql", "psql"]
+
+
+BIG_QUERY_SCHEMA = [
+        bigquery.SchemaField("first_name", "STRING"),
+        bigquery.SchemaField("last_name", "STRING"),
+        bigquery.SchemaField("email", "STRING"),
+        bigquery.SchemaField("dob", "STRING"),
+        bigquery.SchemaField("address", "STRING"),
+        bigquery.SchemaField("country", "STRING"),
+        bigquery.SchemaField("blood_group", "STRING"),
+        bigquery.SchemaField("height", "FLOAT"),
+        bigquery.SchemaField("weight", "INTEGER"),
+        bigquery.SchemaField("credit_card", "STRING"),
+        bigquery.SchemaField("card_type", "STRING"),
+        bigquery.SchemaField("last_name", "STRING"),
+        bigquery.SchemaField("expiry_date", "STRING"),
+    ]

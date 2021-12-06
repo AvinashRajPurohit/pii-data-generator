@@ -19,7 +19,7 @@ if path.isfile(requirementPath):
 print(install_requires)
 setup(
     name="pii-data-generator",
-    version="1.0.7",
+    version="1.1.1",
     description="It generats the dummy 'Personally identifiable information' data",
     long_description=README,
     long_description_content_type="text/markdown",

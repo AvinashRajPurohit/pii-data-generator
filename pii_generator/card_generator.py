@@ -16,7 +16,7 @@ except:
 if PRODUCTION:
   from .utils import get_random_generator
 else:
-  from utils import get_random_generator
+  from .utils import get_random_generator
 
 
   

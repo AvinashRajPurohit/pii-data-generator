@@ -8,8 +8,7 @@ Built with ❤︎ and :coffee: in one night by  [Deepak Rajpurohit](https://gith
 
 ---
 
-[![GitHub](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/OmkarPathak/pyresparser/blob/master/LICENSE) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django.svg) 
-[![Build Status](https://travis-ci.com/OmkarPathak/pyresparser.svg?branch=master)](https://travis-ci.com/OmkarPathak/pyresparser)
+[![GitHub](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/AvinashRajPurohit/pii-data-generator/blob/master/LICENSE) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django.svg) 
 
 
 # Features
@@ -54,7 +53,7 @@ pii --n 400  --a yes --conn <mongo-db connection string>
 ```
 
 #### For Programmers usage:
-
+# AZURE
 ## For the all the cosmos databases or in mongo database
 ```bash
 from pii_generator.pii_data_generator import PIIGenerator
@@ -92,6 +91,38 @@ pii_gen.insert_pii_data_in_azure_maria_db(psql_config_json_file_path)
 ```
 
 
+# GCP
+
+#### For the all the cosmos databases or in mysql database
+
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+database_conn_string = ""
+pii_gen.insert_pii_data_in_gcp_mysql_db(database_conn_string)
+```
+
+
+#### For the all the cosmos databases or in postgres database
+
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+database_conn_string = ""
+pii_gen.insert_pii_data_in_gcp_psql_db(database_conn_string)
+```
+
+#### For the all the cosmos databases or in Sql database
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+database_conn_string = ""
+pii_gen.insert_pii_data_in_gcp_sql_db(database_conn_string)
+
+```
 
 
 ```bash

@@ -26,6 +26,6 @@ class PIIDocument(Document):
     weight = IntField()
     email = EmailField()
     blood_group = StringField()
-    expiry_data = StringField()
+    expiry_date = StringField()
     updated_at = DateTimeField(default=str(datetime.now()))
     created_at = DateTimeField(default=str(datetime.now()))
