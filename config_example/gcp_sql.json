@@ -1,6 +1,6 @@
 {
-    "user": "sqlserver",
-    "password": "admin@123",
-    "server": "35.202 .93 .54",
-    "database": "testdb"
+    "user": "user",
+    "password": "password",
+    "server": "server",
+    "database": "database"
 }

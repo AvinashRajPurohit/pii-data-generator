@@ -1,6 +1,7 @@
 {
+    "user": "username@server_name",
+    "password": "password",
     "server": "server",
     "database": "database",
-    "username": "username",
-    "password": "password"
+    "port": 1433
 }

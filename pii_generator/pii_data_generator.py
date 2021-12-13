@@ -27,6 +27,7 @@ if PRODUCTION:
   from .gcp_psql import enter_pii_data_in_gcp_psql
   from .gcp_sql import enter_pii_data_in_gcp_sql  
   from .gcp_bigquery import enter_pii_data_in_gcp_bigquery
+  from .azure_sql import enter_pii_data_in_azure_sql
 
 
 else:
@@ -39,7 +40,7 @@ else:
   from psql_config import enter_pii_data_in_psql
   from gcp_sql import enter_pii_data_in_gcp_sql  
   from gcp_bigquery import enter_pii_data_in_gcp_bigquery
-
+  from azure_sql import enter_pii_data_in_azure_sql
   from .utils import ( return_prefix_ls, 
                       return_random_blood,
                       return_random_cvv,
@@ -271,16 +272,16 @@ class PIIGenerator(object):
     """
     This function will insert PII data in Azure Mysql db
     """
-    try:
-      pii_data = self.get_data_for_sql()
-      insert_data = enter_pii_data_in_gcp_sql(config_file_path, pii_data)
+    # try:
+    pii_data = self.get_data_for_sql()
+    insert_data = enter_pii_data_in_gcp_sql(config_file_path, pii_data)
 
-      if type(insert_data) == bool:
-        return "message: Data has been inserted successfully"
-      return insert_data
+    if type(insert_data) == bool:
+      return "message: Data has been inserted successfully"
+    return insert_data
       
-    except Exception as e:
-      return {f"message: something went wrong // {e}"}
+    # except Exception as e:
+    #   return {f"message: something went wrong // {e}"}
 
 
   def insert_pii_data_in_gcp_mysql_db(self, config_file_path: str):
@@ -305,6 +306,20 @@ class PIIGenerator(object):
     try:
       pii_data = self.get_data_in_df()
       insert_data = enter_pii_data_in_gcp_bigquery(config_file_path, pii_data)
+      if type(insert_data) == bool:
+        return "message: Data has been inserted successfully"
+      return insert_data
+      
+    except Exception as e:
+      return {f"message: something went wrong // {e}"}
+
+  def insert_pii_data_in_azure_sql(self, config_file_path: str):
+    """
+    This function will insert PII data in Azure Mysql db
+    """
+    try:
+      pii_data = self.get_data_for_sql()
+      insert_data = enter_pii_data_in_azure_sql(config_file_path, pii_data)
       if type(insert_data) == bool:
         return "message: Data has been inserted successfully"
       return insert_data

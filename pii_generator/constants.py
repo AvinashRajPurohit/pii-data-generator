@@ -61,9 +61,9 @@ PII_TABLE_SQL_QUERY = ( "CREATE TABLE if not exists PII ("
 
 
 
-INSERT_QUERY_MARIADB = """ insert into PII (
+INSERT_QUERY_MARIADB = """INSERT INTO PII (
 first_name, last_name, address, email, country, dob, credit_card, card_type, cvv, expiry_date, height, weight, blood_group) 
-values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)           
+VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)           
 """
 
 
@@ -87,3 +87,21 @@ BIG_QUERY_SCHEMA = [
         bigquery.SchemaField("last_name", "STRING"),
         bigquery.SchemaField("expiry_date", "STRING"),
     ]
+
+
+
+SQL_QUERY = ( "CREATE TABLE PII ("
+                        "first_name VARCHAR(255),"
+                        "last_name VARCHAR(255),"
+                        "address VARCHAR(255),"
+                        "email VARCHAR(255),"
+                        "country VARCHAR(255),"
+                        "dob VARCHAR(255),"
+                        "credit_card VARCHAR(255),"
+                        "card_type VARCHAR(255),"
+                        "cvv INTEGER,"
+                        "height REAL,"
+                        "weight INTEGER,"
+                        "blood_group VARCHAR(255),"
+                        "expiry_date VARCHAR(255))")
+

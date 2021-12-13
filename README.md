@@ -62,6 +62,9 @@ pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
 database_conn_string = ""
 pii_gen.insert_data_in_mongo(database_conn_string)
 ```
+# For the config files example you can go here... !
+
+###### https://github.com/AvinashRajPurohit/pii-data-generator/tree/master/config_example
 
 ## For insert data in azure mysql
 ```bash
@@ -86,8 +89,18 @@ pii_gen.insert_pii_data_in_azure_mysql_db(psql_config_json_file_path)
 from pii_generator.pii_data_generator import PIIGenerator
 pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
 
-psql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/maria.json"
-pii_gen.insert_pii_data_in_azure_maria_db(psql_config_json_file_path)
+maria_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/maria.json"
+pii_gen.insert_pii_data_in_azure_maria_db(maria_config_json_file_path)
+```
+
+## for insert data in azure sql
+
+```bash
+from pii_generator.pii_data_generator import PIIGenerator
+pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
+
+sql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/azure_sql.json"
+print(pii_gen.insert_pii_data_in_azure_sql(sql_config_json_file_path))
 ```
 
 
@@ -99,8 +112,8 @@ pii_gen.insert_pii_data_in_azure_maria_db(psql_config_json_file_path)
 from pii_generator.pii_data_generator import PIIGenerator
 pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
 
-database_conn_string = ""
-pii_gen.insert_pii_data_in_gcp_mysql_db(database_conn_string)
+mysql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/gcp_mysql.json"
+pii_gen.insert_pii_data_in_gcp_mysql_db(mysql_config_json_file_path)
 ```
 
 
@@ -110,8 +123,8 @@ pii_gen.insert_pii_data_in_gcp_mysql_db(database_conn_string)
 from pii_generator.pii_data_generator import PIIGenerator
 pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
 
-database_conn_string = ""
-pii_gen.insert_pii_data_in_gcp_psql_db(database_conn_string)
+psql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/gcp_psql.json"
+pii_gen.insert_pii_data_in_gcp_psql_db(psql_config_json_file_path)
 ```
 
 #### For the all the cosmos databases or in Sql database
@@ -119,8 +132,8 @@ pii_gen.insert_pii_data_in_gcp_psql_db(database_conn_string)
 from pii_generator.pii_data_generator import PIIGenerator
 pii_gen = PIIGenerator(how_many=100, both_credit_type=True)
 
-database_conn_string = ""
-pii_gen.insert_pii_data_in_gcp_sql_db(database_conn_string)
+sql_config_json_file_path = "/Users/deepak9636/Downloads/pii-data-generator-master/config_example/gcp_psql.json"
+pii_gen.insert_pii_data_in_gcp_sql_db(sql_config_json_file_path)
 
 ```
 

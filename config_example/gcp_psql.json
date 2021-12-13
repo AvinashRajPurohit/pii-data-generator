@@ -1,6 +1,6 @@
 {
-    "user": "postgres",
-    "password": "admin@123",
-    "host": "34.136.184.171",
-    "database": "testdb"
+    "user": "user",
+    "password": "password",
+    "host": "host",
+    "database": "database"
 }
